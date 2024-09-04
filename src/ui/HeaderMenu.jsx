@@ -15,7 +15,6 @@ function HeaderMenu() {
 
   return (
     <StyledHeaderMenu>
-      <li>Test deploy 2</li>
       <li>
         <ButtonIcon onClick={() => navigate("/account")}>
           <HiOutlineUser />
