@@ -30,6 +30,7 @@ function UserAvatar() {
         alt={`Avatar of ${data?.user_metadata?.fullName}`}
       />
       <span>{data?.user_metadata?.fullName}</span>
+      <span>123456</span>
     </StyledUserAvatar>
   );
 }
