@@ -2,21 +2,24 @@ import {
   HiOutlineBanknotes,
   HiOutlineBriefcase,
   HiOutlineCalendarDays,
-  HiOutlineChartBar,
 } from "react-icons/hi2";
-import Stat from "./Stat";
 import { formatCurrency } from "../../utils/helpers";
+import styled from "styled-components";
+import Stat from "./Stat";
 
-function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
+const Container = styled.div`
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+function Stats({ bookings, confirmedStays }) {
   const numBookings = bookings.length;
   const sales = bookings.reduce((acc, cur) => acc + cur.totalPrice, 0);
   const checkins = confirmedStays.length;
-  const occupation =
-    confirmedStays.reduce((acc, cur) => acc + cur.numNights, 0) /
-    (numDays * cabinCount);
 
   return (
-    <>
+    <Container>
       <Stat
         title="Bookings"
         color="blue"
@@ -35,13 +38,7 @@ function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
         icon={<HiOutlineCalendarDays />}
         value={checkins}
       />
-      <Stat
-        title="Occupancy rate"
-        color="yellow"
-        icon={<HiOutlineChartBar />}
-        value={Math.round(occupation * 100) + "%"}
-      />
-    </>
+    </Container>
   );
 }
 

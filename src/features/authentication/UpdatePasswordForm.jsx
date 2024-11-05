@@ -5,6 +5,7 @@ import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import useUpdateUser from "./useUpdateUser";
 import Heading from "../../ui/Heading";
+import { NOT_CAN_EDIT } from "../../constants/change-mode";
 
 function UpdatePasswordForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm();
@@ -56,7 +57,7 @@ function UpdatePasswordForm() {
           />
         </FormRow>
         <FormRow>
-          <Button disabled={isUpdating}>Update password</Button>
+          <Button disabled={isUpdating || NOT_CAN_EDIT}>Update password</Button>
         </FormRow>
       </Form>
     </>

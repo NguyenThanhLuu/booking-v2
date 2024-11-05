@@ -6,6 +6,7 @@ import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import Textarea from "../../ui/Textarea";
 import useAddNewOrEdit from "./useAddNewOrEdit";
+import { NOT_CAN_EDIT } from "../../constants/change-mode";
 
 const FormRow = styled.div`
   display: grid;
@@ -169,7 +170,7 @@ function CreateCabinForm({ editedCabinData, setIsShowForm }) {
         >
           Cancel
         </Button>
-        <Button disabled={isLoading}>
+        <Button disabled={isLoading || NOT_CAN_EDIT}>
           {editedCabinData ? "Update" : "Add"}
         </Button>
       </FormRow>

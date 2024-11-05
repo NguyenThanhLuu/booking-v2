@@ -7,6 +7,7 @@ import Input from "../../ui/Input";
 import useUpdateUser from "./useUpdateUser";
 import useGetUser from "./useGetUser";
 import Heading from "../../ui/Heading";
+import { NOT_CAN_EDIT } from "../../constants/change-mode";
 
 function UpdateUserDataForm() {
   const { data } = useGetUser();
@@ -57,7 +58,7 @@ function UpdateUserDataForm() {
           />
         </FormRow>
         <FormRow>
-          <Button disabled={isLoading || isUnvalidInput()}>
+          <Button disabled={isLoading || isUnvalidInput() || NOT_CAN_EDIT}>
             Update account
           </Button>
         </FormRow>
