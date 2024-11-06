@@ -2,16 +2,17 @@ import { useForm } from "react-hook-form";
 import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
+import Heading from "../../ui/Heading";
 import Input from "../../ui/Input";
 import useUpdateUser from "./useUpdateUser";
-import Heading from "../../ui/Heading";
-import { NOT_CAN_EDIT } from "../../constants/change-mode";
+import useCheckAdmin from "./useCheckAdmin";
 
 function UpdatePasswordForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm();
   const { errors } = formState;
 
   const { updateUserData, isUpdating } = useUpdateUser();
+  const isNormalUser = useCheckAdmin();
 
   function onSubmit({ password }) {
     updateUserData({ password }, { onSuccess: () => reset() });
@@ -57,7 +58,7 @@ function UpdatePasswordForm() {
           />
         </FormRow>
         <FormRow>
-          <Button disabled={isUpdating || NOT_CAN_EDIT}>Update password</Button>
+          <Button disabled={isUpdating || isNormalUser}>Update password</Button>
         </FormRow>
       </Form>
     </>

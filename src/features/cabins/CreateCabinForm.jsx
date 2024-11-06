@@ -5,8 +5,8 @@ import FileInput from "../../ui/FileInput";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import Textarea from "../../ui/Textarea";
+import useCheckAdmin from "../authentication/useCheckAdmin";
 import useAddNewOrEdit from "./useAddNewOrEdit";
-import { NOT_CAN_EDIT } from "../../constants/change-mode";
 
 const FormRow = styled.div`
   display: grid;
@@ -48,6 +48,7 @@ function CreateCabinForm({ editedCabinData, setIsShowForm }) {
   const { register, handleSubmit, reset, getValues, formState } = useForm();
   const { errors } = formState;
   const { mutate, isLoading } = useAddNewOrEdit(editedCabinData);
+  const isNormalUser = useCheckAdmin();
 
   function onSubmit(collectedData) {
     const sendData = {
@@ -170,7 +171,7 @@ function CreateCabinForm({ editedCabinData, setIsShowForm }) {
         >
           Cancel
         </Button>
-        <Button disabled={isLoading || NOT_CAN_EDIT}>
+        <Button disabled={isLoading || isNormalUser}>
           {editedCabinData ? "Update" : "Add"}
         </Button>
       </FormRow>

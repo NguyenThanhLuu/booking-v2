@@ -3,13 +3,13 @@ import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
+import useCheckAdmin from "./useCheckAdmin";
 import useSignUp from "./useSignUp";
-import { NOT_CAN_EDIT } from "../../constants/change-mode";
 
 function SignupForm() {
   const { register, formState, getValues, handleSubmit, reset } = useForm();
   const { errors } = formState;
-
+  const isNormalUser = useCheckAdmin();
   const { signUp, isLoading } = useSignUp();
 
   function onSubmit(data) {
@@ -77,7 +77,7 @@ function SignupForm() {
         <Button variation="secondary" type="reset">
           Cancel
         </Button>
-        <Button disabled={isLoading || NOT_CAN_EDIT}>Create new user</Button>
+        <Button disabled={isLoading || isNormalUser}>Create new user</Button>
       </FormRow>
     </Form>
   );

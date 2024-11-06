@@ -3,17 +3,18 @@ import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
-import Input from "../../ui/Input";
-import useUpdateUser from "./useUpdateUser";
-import useGetUser from "./useGetUser";
 import Heading from "../../ui/Heading";
-import { NOT_CAN_EDIT } from "../../constants/change-mode";
+import Input from "../../ui/Input";
+import useGetUser from "./useGetUser";
+import useUpdateUser from "./useUpdateUser";
+import useCheckAdmin from "./useCheckAdmin";
 
 function UpdateUserDataForm() {
   const { data } = useGetUser();
   const [fullName, setFullName] = useState("");
   const [avatar, setAvatar] = useState(null);
   const { updateUserData, isLoading } = useUpdateUser();
+  const isNormalUser = useCheckAdmin();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -58,7 +59,7 @@ function UpdateUserDataForm() {
           />
         </FormRow>
         <FormRow>
-          <Button disabled={isLoading || isUnvalidInput() || NOT_CAN_EDIT}>
+          <Button disabled={isLoading || isUnvalidInput() || isNormalUser}>
             Update account
           </Button>
         </FormRow>

@@ -17,6 +17,7 @@ export async function signup({ fullName, email, password }) {
       data: {
         fullName,
         avatar: "",
+        isAdmin: true,
       },
     },
   });
